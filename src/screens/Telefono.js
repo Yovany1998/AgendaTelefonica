@@ -10,7 +10,7 @@ import { Input, Container, Form, Item, H1, Button, Content,Textarea,placeholder,
 // Importar el contexto de las notas
 import { NotesContext } from "../context/NotesContext";
 const Telefono = () => {
-
+  const [value, onChangeText] = React.useState('Nombre');
 
 
   
@@ -23,15 +23,22 @@ const Telefono = () => {
         style={styles.phone}
       />
       <Container>
-        <H1    style={styles.h1}>Ingresa el numero</H1>
+        <H1    style={styles.h1}>Registrar</H1>
         <Textarea
             style={styles.caja}
             rowSpan={2}
             bordered
-          placeholder="Tigo-Claro"
+          placeholder="Numero"
           value={""}
     
         />
+
+<TextInput
+      style={{marginLeft:40,marginRight:40, height: 50, borderColor: '#D5DBDB', borderWidth: 1,marginTop:30 }}
+      placeholder="Tigo-Claro"
+      value={value}
+    />
+    
         <Button style={styles.button}>
           <Text>Guardar</Text>
         </Button>
@@ -61,11 +68,14 @@ const styles = StyleSheet.create({
     marginRight:40
   },
   button:{
+    marginTop:5,
     marginLeft: 40,
     marginRight:40
   },
   h1:{
-    marginLeft: 90,
+    flex:0.1,
+    
+    marginLeft: 150,
     marginRight:90
   },
 
