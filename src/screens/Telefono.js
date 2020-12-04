@@ -1,57 +1,75 @@
-// import React from "react";
-// import { StyleSheet, Text, View, Image, Dimensions, View, Text, StyleSheet } from "react-native";
-// import { Input, Container, Form, Item, H1, Button, Content } from "native-base";
 
-// import React, { View, Text, StyleSheet } from "react-native";
-// import Keyboard from "react-native-keyboard";
-// //destructuring
-// const { width, height } = Dimensions.get("window");
-// //renderizar pantalla
-// const Telefono = () => {
-//   return (
-//     <View style={{ flex: 1 }}>
-//     <View style={{ flex: 1 }}>
-//     <Text style={styles.text}>{this.state.text}</Text>
-//     </View>
-//     <Keyboard
-//     keyboardType="decimal-pad"
-//     onClear={this._handleClear.bind(this)}
-//     onDelete={this._handleDelete.bind(this)}
-//     onKeyPress={this._handleKeyPress.bind(this)}
-//     />
-//     </View>
-//   );
-// };
+import React, { useContext, useState,Component } from "react";
+import { TextInput,StyleSheet,Image,Dimensions  } from 'react-native';
+import { Input, Container, Form, Item, H1, Button, Content,Textarea,placeholder,Text } from "native-base";
 
-// //estilos de la pantalla
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         justifyContent: "center",
-//         alignItems: "center",
-//       },
-//       input: {
-//         margin: 15,
-//       },
-//       photoImage: {
-//         width: width,
-//         height: "12%",
-//         resizeMode: "contain",
-//         //marginTop: 20,
-//       },
-//   buttonName: {
-//     fontSize: 25,
-//   },
-//   buttonCenter: {
-//     marginTop: "30%",
-//     marginRight: "10%",
-//     marginLeft: "10%",
-//     backgroundColor: "green",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     height: "10%",
-//     //flex: 6,
-//   },
-// });
+  //destructuring
+  const { width, height } = Dimensions.get("window");
 
-// export default Telefono;
+
+// Importar el contexto de las notas
+import { NotesContext } from "../context/NotesContext";
+const Telefono = () => {
+
+
+
+  
+  return (
+   
+
+   <Content>
+          <Image
+        source={require("../../assets/agenda.jpeg")}
+        style={styles.phone}
+      />
+      <Container>
+        <H1    style={styles.h1}>Ingresa el numero</H1>
+        <Textarea
+            style={styles.caja}
+            rowSpan={2}
+            bordered
+          placeholder="Tigo-Claro"
+          value={""}
+    
+        />
+        <Button style={styles.button}>
+          <Text>Guardar</Text>
+        </Button>
+      </Container>
+    </Content>
+
+    
+  );
+}
+const styles = StyleSheet.create({
+  textoInput: {
+    marginTop: 100,
+    marginLeft:50,
+    marginRight:50,
+    height: 60,
+    borderColor: 'gray',
+    borderWidth: 1 
+  },
+  phone: {
+    width: width,
+    height: "12%",
+    resizeMode: "contain",
+    marginTop: 20,
+  },
+  caja:{
+    marginLeft: 40,
+    marginRight:40
+  },
+  button:{
+    marginLeft: 40,
+    marginRight:40
+  },
+  h1:{
+    marginLeft: 90,
+    marginRight:90
+  },
+
+
+});
+
+export default Telefono;
