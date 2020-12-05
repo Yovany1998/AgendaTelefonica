@@ -3,41 +3,41 @@ import * as SQLite from "expo-sqlite";
 
 // https://docs.expo.io/versions/latest/sdk/sqlite/
 // Crea y abre la base de datos
-const db = SQLite.openDatabase("fastnotes.db");
+const db = SQLite.openDatabase("PhoneAgenda.db");
 
 // Funcionalidades de la base de datos
 
 // Obtener las notas del usuario
-const getNotes = (setNotesFunc) => {
+const getNumbers = (setNumbersFunc) => {
   db.transaction((tx) => {
     tx.executeSql(
-      "select * from notes",
+      "select * from numbers",
       [],
       (_, { rows: { _array } }) => {
-        setNotesFunc(_array);
+        setNumbersFunc(_array);
       },
       (_t, error) => {
-        console.log("Error al momento de obtener las notas");
+        console.log("Error al momento de obtener los contactos");
         console.log(error);
       },
       (_t, _success) => {
-        console.log("Notas obtenidas");
+        console.log("Contactos obtenidos");
       }
     );
   });
 };
 
 // Insertar notas
-const insertNotes = (note, successFunc) => {
+const insertNumbers = (number, successFunc) => {
   db.transaction(
     (tx) => {
-      tx.executeSql("insert into notes (note, status) values (?,?)", [
-        note,
+      tx.executeSql("insert into numbers (number, status) values (?,?)", [
+        number,
         "NUEVA",
       ]);
     },
     (_t, error) => {
-      console.log("Error al insertar la nota");
+      console.log("Error al insertar el contacto");
       console.log(error);
     },
     (_t, _success) => {
@@ -51,10 +51,10 @@ const dropDatabaseTableAsync = async () => {
   return new Promise((resolve, reject) => {
     db.transaction(
       (tx) => {
-        tx.executeSql("drop table notes");
+        tx.executeSql("drop table numbers");
       },
       (_t, error) => {
-        console.log("Error al eliminar la tabla de notas");
+        console.log("Error al eliminar la tabla de contactos");
         reject(error);
       },
       (_t, result) => {
@@ -64,13 +64,13 @@ const dropDatabaseTableAsync = async () => {
   });
 };
 
-// Creación de la tabla de notas
+// Creación de la tabla de numeros
 const setupDatabaseTableAsync = async () => {
   return new Promise((resolve, reject) => {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          "create table if not exists notes (id integer primary key autoincrement, note text not null, status text not null);"
+          "create table if not exists numbers (id integer primary key autoincrement, number text not null, status text not null);"
         );
       },
       (_t, error) => {
@@ -86,13 +86,13 @@ const setupDatabaseTableAsync = async () => {
   });
 };
 
-// Agrega una nota por defecto
-const setupNotesAsync = async () => {
+// Agrega un contacto por defecto
+const setupNumbersAsync = async () => {
   return new Promise((resolve, reject) => {
     db.transaction(
       (tx) => {
-        tx.executeSql("insert into notes (note, status) values (?,?)", [
-          "Bienvenido a Fastnotes",
+        tx.executeSql("insert into numbers (number, status) values (?,?)", [
+          "Bienvenido a PhoneAgenda",
           "NUEVA",
         ]);
       },
@@ -109,9 +109,9 @@ const setupNotesAsync = async () => {
 };
 
 export const database = {
-  getNotes,
-  insertNotes,
+  getNumbers,
+  insertNumbers,
   dropDatabaseTableAsync,
   setupDatabaseTableAsync,
-  setupNotesAsync,
+  setupNumbersAsync,
 };

@@ -8,14 +8,17 @@ import { Input, Container, Form, Item, H1, Button, Content,Textarea,placeholder,
 
 
 // Importar el contexto de las notas
-import { NotesContext } from "../context/NotesContext";
+import { NumbersContext } from "../context/NumbersContext";
 const Telefono = () => {
   const [value, onChangeText] = React.useState('Nombre');
+  const [number, setNumber] = useState("");
+  const numbersContext = useContext(NumbersContext);
+  const { addNewNumber, refreshNumbers } = numbersContext;
+  const handlerNewNumber = () => {
+    addNewNumber(number, refreshNumbers);
+  };
 
-
-  
   return (
-   
 
    <Content>
           <Image
@@ -29,7 +32,7 @@ const Telefono = () => {
             rowSpan={2}
             bordered
           placeholder="Numero"
-          value={""}
+          value={number}
     
         />
 
@@ -40,6 +43,7 @@ const Telefono = () => {
     />
     
         <Button style={styles.button}>
+          onPress={handlerNewNumber}
           <Text>Guardar</Text>
         </Button>
       </Container>
