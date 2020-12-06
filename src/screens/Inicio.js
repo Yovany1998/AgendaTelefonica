@@ -1,11 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import { Input, Container, Form, Item, H1, Button, Content } from "native-base";
+import { Grid } from "react-native-easy-grid";
 
 //destructuring
 const { width, height } = Dimensions.get("window");
 //renderizar pantalla
-const Inicio = () => {
+const Inicio = ({ route, navigation }) => {
   return (
     //backgroundcolor el color de fondo
     <Container>
@@ -16,6 +17,7 @@ const Inicio = () => {
       
        
         <Button
+          onPress={() => navigation.navigate("Telefono")}
           style={styles.buttonCenter}
           block
         >
