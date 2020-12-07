@@ -7,8 +7,7 @@ export const NumbersContext = createContext({});
 export const NumbersContextProvider = (props) => {
   // Obtener los valores iniciales para el contexto
   // se obtienen desde los props
-  const { numbers: initialNumbers, children } = props;
-
+  const { numbers: initialNumbers, children } = props; 
   // Almacenar los valores en el estado
   const [numbers, setNumbers] = useState(initialNumbers);
 

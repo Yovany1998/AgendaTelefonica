@@ -11,13 +11,14 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 // Importar el contexto de las notas
 import { NumbersContext } from "../context/NumbersContext";
 
-const Telefono = () => {
+const Telefono = (navigation) => {
   //const [value, onChangeText] = React.useState('Nombre');
   const [number, setNumber] = useState("");
   const numbersContext = useContext(NumbersContext);
-  const { addNewNumber, refreshNumbers } = numbersContext;
+  const { addNewNumbers, refreshNumbers } = numbersContext;
   const handlerNewNumber = () => {
-    addNewNumber(number, refreshNumbers);
+    addNewNumbers(number, refreshNumbers);
+    navigation.goBack();
   };
 
   return (
