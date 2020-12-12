@@ -8,7 +8,7 @@ const useDatabase = () => {
     try {
       // await database.dropDatabaseTableAsync();
       // await database.setupDatabaseTableAsync();
-      // await database.setupNotesAsync();
+      await database.setupNumbersAsync();
 
       // Finaliza la carga de la DB
       setIsLoadingComplete(true);
@@ -16,7 +16,7 @@ const useDatabase = () => {
       console.log(error);
     }
   };
-
+ 
   useEffect(() => {
     loadDatabase();
   }, []);
