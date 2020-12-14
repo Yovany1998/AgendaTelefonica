@@ -9,19 +9,26 @@ const { width, height } = Dimensions.get("window");
 const Start = ({ route, navigation }) => {
   return (
     //backgroundcolor el color de fondo
-    <Container>
-     <Image
-        source={require("../../assets/agenda.jpeg")}
+    <Container> 
+      <Form>
+      <Grid>
+          <Image
+            source={require("../../assets/siu.jpg")}
+            style={styles.wallpaper}
+          />
+        </Grid>
+      <Image
+        source={require("../../assets/simio.png")}
         style={styles.photoImage}
       />
       
        
         <Button
-          onPress={() => navigation.navigate("AddContact")}
+          onPress={() => navigation.navigate("Add contact")}
           style={styles.buttonCenter}
           block
         >
-          <Text style={styles.buttonName}>Add numero </Text>
+          <Text style={styles.buttonName}>Add contacts </Text>
         </Button>
         <Button  
           onPress={() => navigation.navigate("VerModificar")}
@@ -30,8 +37,10 @@ const Start = ({ route, navigation }) => {
           blue
           
         >
-          <Text style={styles.buttonName}>view contacts </Text>
+          <Text style={styles.buttonName}>View contacts </Text>
         </Button>
+      </Form>
+     
      
      
     </Container>
@@ -50,22 +59,29 @@ const styles = StyleSheet.create({
       },
       photoImage: {
         width: width,
-        height: "12%",
+        height: "25%",
         resizeMode: "contain",
         //marginTop: 20,
       },
   buttonName: {
     fontSize: 25,
+    color: "black",
   },
   buttonCenter: {
-    marginTop: "30%",
+    marginTop: "15%",
     marginRight: "10%",
     marginLeft: "10%",
-    backgroundColor: "green",
+    backgroundColor: "#7ed321",
+    borderColor: "black",
+    borderWidth: 5,
     justifyContent: "center",
     alignItems: "center",
-    height: "10%",
+    height: "14%",
     //flex: 6,
+  },
+  wallpaper: {
+    flex: 1,
+    height: height * 1,
   },
 });
 

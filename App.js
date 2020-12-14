@@ -28,10 +28,14 @@ export default function App() {
       <NumbersContextProvider>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Start">
-          <Stack.Screen name="Start" component={Start} />
+           <Stack.Screen name="Start" 
+           options={{
+            headerShown: false,
+          }}
+           component={Start} />
          
             <Stack.Screen name="VerModificar" component={ListContact} />
-            <Stack.Screen name="AddContact" component={AddContact} />
+            <Stack.Screen name="Add contact" component={AddContact} />
             <Stack.Screen name="numberModify" component={ModifyContact} />
           </Stack.Navigator>
         </NavigationContainer>

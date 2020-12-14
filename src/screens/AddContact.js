@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Image, Dimensions } from "react-native";
 import {
   Button,
   Container,
@@ -9,8 +9,13 @@ import {
   Textarea,
   Spinner,
   View,
+  Form,
 } from "native-base";
 import * as Font from "expo-font";
+import { Grid } from "react-native-easy-grid";
+
+//destructuring
+const { width, height } = Dimensions.get("window");
 
 // Importar el contexto de las notas
 import { NumbersContext } from "../context/NumbersContext";
@@ -67,7 +72,14 @@ const AddContact = ({ navigation }) => {
   return (
     <Content>
       <Container style={styles.container}>
-        <H1>Ingresa el contacto</H1>
+        <Form>
+        <Grid>
+          <Image
+            source={require("../../assets/siu.jpg")}
+            style={styles.wallpaper}
+          />
+        </Grid>
+        <H1>Fill the information below</H1>
 
         <Textarea
           rowSpan={2}
@@ -76,6 +88,7 @@ const AddContact = ({ navigation }) => {
           value={nombre}
           onChangeText={setNombre}
           style={errorNumber ? styles.inputError : styles.number}
+          style={styles.caja}
         />
         {errorNumber ? (
           <Text style={styles.error}>¡Debes ingresar un nombre!</Text>
@@ -89,6 +102,7 @@ const AddContact = ({ navigation }) => {
           value={lastname}
           onChangeText={setLastname}
           style={errorNumber ? styles.inputError : styles.number}
+          style={styles.caja}
         />
         {errorNumber ? (
           <Text style={styles.error}>¡Debes ingresar un apellido!</Text>
@@ -101,6 +115,7 @@ const AddContact = ({ navigation }) => {
           value={number}
           onChangeText={setNumber}
           style={errorNumber ? styles.inputError : styles.number}
+          style={styles.caja}
         />
         {errorNumber ? (
           <Text style={styles.error}>¡Debes ingresar un numero!</Text>
@@ -113,15 +128,19 @@ const AddContact = ({ navigation }) => {
           value={mail}
           onChangeText={setMail}
           style={styles.number}
+          style={styles.caja}
         />
 
         <Button
           style={styles.button}
           onPress={handlerNewNumber}
+          style={styles.caja}
           // disabled={enableSave}
         >
           <Text>Guardar</Text>
         </Button>
+        </Form>
+        
       </Container>
     </Content>
   );
@@ -133,10 +152,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   container: {
-    padding: 10,
+    //padding: 10,
   },
   button: {
     fontFamily: "Roboto",
+  },
+  caja: {
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    borderColor: "black",
   },
   error: {
     fontSize: 12,
@@ -149,6 +174,10 @@ const styles = StyleSheet.create({
   number: {
     borderColor: "black",
     marginBottom: 10,
+  },
+  wallpaper: {
+    flex: 1,
+    height: height * 1,
   },
 });
 
