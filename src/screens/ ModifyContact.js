@@ -16,12 +16,14 @@ import { NumbersContext } from "../context/NumbersContext";
 const ModifyContact = ({ route, navigation }) => {
   const { id } = route.params;
   const [theNumber, setTheNumber] = useState(null);
-  const [theNombre, setTheNombre] = useState(false);
+  const [theMail, setTheMail] = useState(null);
+  const [theNombre, setTheNombre] = useState(null);
+  const [theLastname, setTheLastname] = useState(null);
   const [errorNumber, setErrorNumber] = useState(false);
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const numbersContext = useContext(NumbersContext);
   const { number, getNumberById } = numbersContext;
-  const { nombrer, getNombreById } = numbersContext;
+
 
   // Cargar la fuente de manera asíncrona
   useEffect(() => {
@@ -47,9 +49,13 @@ const ModifyContact = ({ route, navigation }) => {
     if (number.length) {
       setTheNumber(number[0].number);
       setTheNombre(number[0].nombre);
+      setTheLastname(number[0].lastname);
+      setTheMail(number[0].mail);
 
-      console.log(theNumber);
-      console.log(theNombre);
+      // console.log(theNumber);
+      // console.log(theNombre);
+      // console.log(theLastname);
+      // console.log(theMail);
     }
   }, [id, number]);
 
@@ -58,7 +64,7 @@ const ModifyContact = ({ route, navigation }) => {
   const handlerSaveNumber = async () => {
     // Validar que la nota tiene valor
     if (number) {
-      await addNewNumber(nombre,number, refreshNumbers);
+      await addNewNumber(nombre,lastname,number,mail, refreshNumbers);
 
       // Regresar a la pantalla anterior
       navigation.goBack();
@@ -78,7 +84,7 @@ const ModifyContact = ({ route, navigation }) => {
   return (
     <Content>
       <Container style={styles.container}>
-        <Text>Modificar nota</Text>
+        <Text>Modificar Contacto</Text>
 
         <Textarea
           value={theNombre}
@@ -88,9 +94,20 @@ const ModifyContact = ({ route, navigation }) => {
           onChange={setTheNumber}
         />
         {errorNumber ? (
-          <Text style={styles.error}>¡Debes ingresar una nota!</Text>
+          <Text style={styles.error}>¡Debes ingresar un nombre!</Text>
         ) : null}
 
+
+       <Textarea
+          value={theLastname}
+          style={styles.number}
+          bordered
+          rowSpan={2}
+          onChange={setTheLastname}
+        />
+        {errorNumber ? (
+          <Text style={styles.error}>¡Debes ingresar un apellido!</Text>
+        ) : null}
         
 
         <Textarea
@@ -101,10 +118,17 @@ const ModifyContact = ({ route, navigation }) => {
           onChange={setTheNumber}
         />
         {errorNumber ? (
-          <Text style={styles.error}>¡Debes ingresar una nota!</Text>
+          <Text style={styles.error}>¡Debes ingresar un numero de telefono!</Text>
         ) : null}
 
-        
+        <Textarea
+          value={theMail}
+          style={styles.number}
+          bordered
+          rowSpan={2}
+          onChange={setTheMail}
+        />
+
         <Button style={styles.button} onPress={handlerSaveNumber}>
           <Text>Guardar</Text>
         </Button>

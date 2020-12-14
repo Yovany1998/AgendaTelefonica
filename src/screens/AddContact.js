@@ -18,6 +18,8 @@ import { NumbersContext } from "../context/NumbersContext";
 const AddContact = ({ navigation }) => {
   const [number, setNumber] = useState("");
   const [nombre, setNombre] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [mail, setMail] = useState("");
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [enableSave, setEnableSave] = useState(true);
   const [errorNumber, setErrorNumber] = useState(false);
@@ -46,7 +48,7 @@ const AddContact = ({ navigation }) => {
   const handlerNewNumber = async () => {
     // Validar que la nota tiene valor
     if (number) {
-      await addNewNumber(nombre,number, refreshNumbers);
+      await addNewNumber(nombre,lastname,number,mail, refreshNumbers);
 
       // Regresar a la pantalla anterior
       navigation.goBack();
@@ -65,7 +67,7 @@ const AddContact = ({ navigation }) => {
   return (
     <Content>
       <Container style={styles.container}>
-        <H1>Ingresa numero</H1>
+        <H1>Ingresa el contacto</H1>
 
         <Textarea
           rowSpan={2}
@@ -77,6 +79,19 @@ const AddContact = ({ navigation }) => {
         />
         {errorNumber ? (
           <Text style={styles.error}>¡Debes ingresar un nombre!</Text>
+        ) : null}
+
+
+        <Textarea
+          rowSpan={2}
+          bordered
+          placeholder="Apellido"
+          value={lastname}
+          onChangeText={setLastname}
+          style={errorNumber ? styles.inputError : styles.number}
+        />
+        {errorNumber ? (
+          <Text style={styles.error}>¡Debes ingresar un apellido!</Text>
         ) : null}
 
         <Textarea
@@ -91,7 +106,15 @@ const AddContact = ({ navigation }) => {
           <Text style={styles.error}>¡Debes ingresar un numero!</Text>
         ) : null}
 
-        
+         <Textarea
+          rowSpan={2}
+          bordered
+          placeholder="Correo Electronico"
+          value={mail}
+          onChangeText={setMail}
+          style={styles.number}
+        />
+
         <Button
           style={styles.button}
           onPress={handlerNewNumber}

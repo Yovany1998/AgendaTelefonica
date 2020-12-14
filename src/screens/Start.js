@@ -17,7 +17,7 @@ const Start = ({ route, navigation }) => {
       
        
         <Button
-          onPress={() => navigation.navigate("Telefono")}
+          onPress={() => navigation.navigate("AddContact")}
           style={styles.buttonCenter}
           block
         >

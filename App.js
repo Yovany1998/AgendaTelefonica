@@ -11,6 +11,7 @@ import AddContact from "./src/screens/AddContact";
 import ModifyContact from "./src/screens/ ModifyContact";
 
 
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Start">
           <Stack.Screen name="Start" component={Start} />
+         
             <Stack.Screen name="VerModificar" component={ListContact} />
             <Stack.Screen name="AddContact" component={AddContact} />
             <Stack.Screen name="numberModify" component={ModifyContact} />

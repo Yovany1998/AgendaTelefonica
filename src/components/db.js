@@ -48,12 +48,15 @@ const getNumberById = (id, setNumberFunc) => {
 };
 
 // Insertar notas
-const insertNumbers = async (nombre,number, successFunc) => {
+const insertNumbers = async (nombre,
+  lastname,number,mail, successFunc) => {
   db.transaction(
     (tx) => {
-      tx.executeSql("insert into numbers (nombre, number) values (?,?)", [
+      tx.executeSql("insert into numbers (nombre, lastname, number,mail) values (?,?,?,?)", [
         nombre,
+        lastname,
         number,
+        mail,
       ]);
     },
     (_t, error) => {
@@ -74,7 +77,7 @@ const dropDatabaseTableAsync = async () => {
         tx.executeSql("drop table numbers");
       },
       (_t, error) => {
-        console.log("Error al eliminar la tabla de notas");
+        console.log("Error al eliminar la tabla de contactos");
         reject(error);
       },
       (_t, result) => {
@@ -90,7 +93,7 @@ const setupDatabaseTableAsync = async () => {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          "create table if not exists numbers (id integer primary key autoincrement, nombre text not null, number text not null);"
+          "create table if not exists numbers (id integer primary key autoincrement, nombre text not null, lastname text not null, number text not null, mail text not null);"
         );
       },
       (_t, error) => {
@@ -111,9 +114,11 @@ const setupNumbersAsync = async () => {
   return new Promise((resolve, reject) => {
     db.transaction(
       (tx) => {
-        tx.executeSql("insert into numbers (nombre, number) values (?,?)", [
-          "Emergencias",
-          "911",
+        tx.executeSql("insert into numbers (nombre, lastname, number,mail) values (?,?,?,?)", [
+          "Yovany",
+          "Hernandez",
+          "33010663",
+          "Geovanyher98@mail.com"
         ]);
       },
       (_t, error) => {

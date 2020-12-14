@@ -31,8 +31,10 @@ const ListContact = ({ navigation }) => {
                   }}
                 >
                   <Body>
-                    <Text numberOfLines={2}>{number.nombre}</Text>
-                    <Text numberOfLines={2}>{number.number}</Text>
+                    <Text numberOfLines={2}>Nombre: {number.nombre}</Text>
+                    <Text numberOfLines={2}>Apellido: {number.lastname}</Text>
+                    <Text numberOfLines={2}>Telefono: {number.number}</Text>
+                    <Text numberOfLines={2}>Correo: {number.mail}</Text>
                   </Body>
                   <Right>
                     <Icon name="arrow-forward" />

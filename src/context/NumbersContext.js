@@ -13,6 +13,8 @@ export const NumbersContextProvider = (props) => {
   const [numbers, setNumbers] = useState(initialNumbers);
   const [number, setNumber] = useState("");
   const [nombre, setNombre] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [mail, setMail] = useState("");
   // Cargar u obtener las notas
   useEffect(() => {
     refreshNumbers();
@@ -22,13 +24,13 @@ export const NumbersContextProvider = (props) => {
     return database.getNumbers(setNumbers);
   };
 
-  const addNewNumber = async (nombre,number) => {
-    await database.insertNumbers(nombre,number, refreshNumbers);
+  const addNewNumber = async (nombre,lastname,number,mail) => {
+    await database.insertNumbers(nombre,lastname,number,mail, refreshNumbers);
     return refreshNumbers();
   };
 
   const getNumberById = (id) => {
-    return database.getNumberById(id, setNumber,setNombre);
+    return database.getNumberById(id, setNumber,setNombre,setLastname,setMail);
 
     console.log(response);
 
@@ -46,6 +48,8 @@ export const NumbersContextProvider = (props) => {
     numbers,
     number,
     nombre,
+    lastname,
+    mail,
     addNewNumber,
     getNumberById,
   };
