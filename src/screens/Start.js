@@ -31,7 +31,7 @@ const Start = ({ route, navigation }) => {
           <Text style={styles.buttonName}>Add contacts </Text>
         </Button>
         <Button  
-          onPress={() => navigation.navigate("VerModificar")}
+          onPress={() => navigation.navigate("Contacts")}
           style={styles.buttonCenter}
           block
           

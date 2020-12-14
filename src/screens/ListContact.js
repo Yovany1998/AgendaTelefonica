@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import {
   Container,
   Content,
@@ -10,7 +10,9 @@ import {
   Text,
   Body,
   Right,
+  Form,
 } from "native-base";
+import { Grid } from "react-native-easy-grid";
 
 // Utilizar el contexto de notas
 import { NumbersContext } from "../context/NumbersContext";
@@ -18,23 +20,24 @@ import { NumbersContext } from "../context/NumbersContext";
 const ListContact = ({ navigation }) => {
   const { numbers } = useContext(NumbersContext);
 
-  return (
+  return ( 
     <Container>
-      <Content>
-        <List>
+      <Content style={styles.content}>
+        <Form>
+        <List style={styles.list}>
           {numbers
             ? numbers.map((number) => (
                 <ListItem
                   key={number.id.toString()}
                   onPress={() => {
-                    navigation.navigate("numberModify", { id: number.id });
+                    navigation.navigate("Update", { id: number.id });
                   }}
                 >
                   <Body>
-                    <Text numberOfLines={2}>Nombre: {number.nombre}</Text>
-                    <Text numberOfLines={2}>Apellido: {number.lastname}</Text>
-                    <Text numberOfLines={2}>Telefono: {number.number}</Text>
-                    <Text numberOfLines={2}>Correo: {number.mail}</Text>
+                    <Text numberOfLines={2} style={styles.name}>Names: {number.nombre}</Text>
+                    <Text numberOfLines={2} style={styles.name}>Surnames: {number.lastname}</Text>
+                    <Text numberOfLines={2} style={styles.name}>Phone number: {number.number}</Text>
+                    <Text numberOfLines={2} style={styles.name}>Email: {number.mail}</Text>
                   </Body>
                   <Right>
                     <Icon name="arrow-forward" />
@@ -43,6 +46,7 @@ const ListContact = ({ navigation }) => {
               ))
             : null}
         </List>
+        </Form>
       </Content>
       {/* <Fab
         active={true}
@@ -59,6 +63,16 @@ const ListContact = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  list:{
+    backgroundColor: "gray",
+  },
+  name:{
+    color: "white",
+  },
+  content:{
+    backgroundColor: "gray",
+  },
+});
 
 export default ListContact;

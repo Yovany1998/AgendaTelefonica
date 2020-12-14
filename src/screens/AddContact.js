@@ -92,7 +92,7 @@ const AddContact = ({ navigation }) => {
           style={styles.caja}
         />
         {errorNumber ? (
-          <Text style={styles.error}>¡Debes ingresar un nombre!</Text>
+          <Text style={styles.error}>You need to add the names!</Text>
         ) : null}
 
 
@@ -106,7 +106,7 @@ const AddContact = ({ navigation }) => {
           style={styles.caja}
         />
         {errorNumber ? (
-          <Text style={styles.error}>¡Debes ingresar un apellido!</Text>
+          <Text style={styles.error}>You need to add the surnames!</Text>
         ) : null}
 
         <Textarea
@@ -119,7 +119,7 @@ const AddContact = ({ navigation }) => {
           style={styles.caja}
         />
         {errorNumber ? (
-          <Text style={styles.error}>¡Debes ingresar un numero!</Text>
+          <Text style={styles.error}>You need to add the phone number!</Text>
         ) : null}
 
          <Textarea

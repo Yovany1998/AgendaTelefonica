@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Image, Dimensions } from "react-native";
 import {
   Container,
   Content,
@@ -7,8 +7,14 @@ import {
   Textarea,
   Spinner,
   Button,
+  H1,
+  Form,
 } from "native-base";
 import * as Font from "expo-font";
+import { Grid } from "react-native-easy-grid";
+
+//destructuring
+const { width, height } = Dimensions.get("window");
 
 // Importar el contexto de las notas
 import { NumbersContext } from "../context/NumbersContext";
@@ -84,54 +90,64 @@ const ModifyContact = ({ route, navigation }) => {
   return (
     <Content>
       <Container style={styles.container}>
-        <Text>Modificar Contacto</Text>
+        <Form>
+        <Grid>
+          <Image
+            source={require("../../assets/siu.jpg")}
+            style={styles.wallpaper}
+          />
+        </Grid>
+        <H1 style={styles.h1}>Update contact</H1>
 
         <Textarea
           value={theNombre}
-          style={styles.number}
+          //style={styles.number}
           bordered
           rowSpan={2}
           onChange={setTheNumber}
+          style={styles.caja}
         />
         {errorNumber ? (
-          <Text style={styles.error}>¡Debes ingresar un nombre!</Text>
+          <Text style={styles.error}>You need to add the names!</Text>
         ) : null}
 
 
        <Textarea
           value={theLastname}
-          style={styles.number}
+          style={styles.caja}
           bordered
           rowSpan={2}
           onChange={setTheLastname}
         />
         {errorNumber ? (
-          <Text style={styles.error}>¡Debes ingresar un apellido!</Text>
+          <Text style={styles.error}>You need to add the surnames!</Text>
         ) : null}
         
 
         <Textarea
           value={theNumber}
-          style={styles.number}
+          style={styles.caja}
           bordered
           rowSpan={2}
           onChange={setTheNumber}
         />
         {errorNumber ? (
-          <Text style={styles.error}>¡Debes ingresar un numero de telefono!</Text>
+          <Text style={styles.error}>You need to add the phone number!</Text>
         ) : null}
 
         <Textarea
           value={theMail}
-          style={styles.number}
+          style={styles.caja}
           bordered
           rowSpan={2}
           onChange={setTheMail}
         />
 
-        <Button style={styles.button} onPress={handlerSaveNumber}>
-          <Text>Guardar</Text>
+        <Button style={styles.button} block onPress={handlerSaveNumber}>
+          <Text style={styles.si} >
+            Save</Text>
         </Button>
+        </Form>
       </Container>
     </Content>
   );
@@ -142,8 +158,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
+  si: {
+    color: "#7ed321",
+  },
   container: {
-    padding: 10,
+    //padding: 10,
   },
   note: {
     borderColor: "black",
@@ -156,6 +175,33 @@ const styles = StyleSheet.create({
   },
   inputError: {
     borderColor: "red",
+  },
+  h1:{
+    marginLeft:90,
+    marginTop:30,
+    marginBottom: 30,
+  },
+  wallpaper: {
+    flex: 1,
+    height: height * 1,
+  },
+  button: {
+    //fontFamily: "Roboto",
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    backgroundColor: "black",
+    borderColor: "black",
+    borderWidth: 5,
+  },
+  caja: {
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    fontSize: 25,
+    height: 40,
+    borderColor: "black",
+    backgroundColor: "white",
   },
 });
 

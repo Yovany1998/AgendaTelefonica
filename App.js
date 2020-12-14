@@ -34,7 +34,14 @@ export default function App() {
           }}
            component={Start} />
          
-            <Stack.Screen name="VerModificar" component={ListContact} />
+            <Stack.Screen name="Contacts" 
+            options={{
+              headerTintColor: '#7ed321',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+            }}
+            component={ListContact} />
             <Stack.Screen name="Add contact" 
             options={{
               headerTintColor: '#7ed321',
@@ -43,7 +50,14 @@ export default function App() {
               },
             }}
             component={AddContact} />
-            <Stack.Screen name="numberModify" component={ModifyContact} />
+            <Stack.Screen name="Update" 
+            options={{
+              headerTintColor: '#7ed321',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+            }}
+            component={ModifyContact} />
           </Stack.Navigator>
         </NavigationContainer>
       </NumbersContextProvider>
