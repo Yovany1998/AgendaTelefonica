@@ -4,10 +4,12 @@ import * as SplashScreen from "expo-splash-screen";
 import useDatabase from "./src/hooks/useDatabase";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import Start from "./src/screens/Start";
 import { NumbersContextProvider } from "./src/context/NumbersContext";
-import NumbersListScreen from "./src/screens/NumbersListScreen";
-import Telefono from "./src/screens/Telefono";
-import NumberModifyScreen from "./src/screens/NumberModifyScreen";
+import ListContact from "./src/screens/ListContact";
+import AddContact from "./src/screens/AddContact";
+import ModifyContact from "./src/screens/ ModifyContact";
+
 
 const Stack = createStackNavigator();
 
@@ -24,10 +26,11 @@ export default function App() {
     <View style={{ flex: 1 }}>
       <NumbersContextProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="numbersList">
-            <Stack.Screen name="numbersList" component={NumbersListScreen} />
-            <Stack.Screen name="numberCreate" component={Telefono} />
-            <Stack.Screen name="numberModify" component={NumberModifyScreen} />
+          <Stack.Navigator initialRouteName="Start">
+          <Stack.Screen name="Start" component={Start} />
+            <Stack.Screen name="VerModificar" component={ListContact} />
+            <Stack.Screen name="AddContact" component={AddContact} />
+            <Stack.Screen name="numberModify" component={ModifyContact} />
           </Stack.Navigator>
         </NavigationContainer>
       </NumbersContextProvider>

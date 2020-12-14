@@ -15,7 +15,7 @@ import {
 // Utilizar el contexto de notas
 import { NumbersContext } from "../context/NumbersContext";
 
-const NumbersListScreen = ({ navigation }) => {
+const ListContact = ({ navigation }) => {
   const { numbers } = useContext(NumbersContext);
 
   return (
@@ -42,7 +42,7 @@ const NumbersListScreen = ({ navigation }) => {
             : null}
         </List>
       </Content>
-      <Fab
+      {/* <Fab
         active={true}
         position="bottomRight"
         style={{ backgroundColor: "#ff0023" }}
@@ -52,11 +52,11 @@ const NumbersListScreen = ({ navigation }) => {
         }}
       >
         <Icon name="plus" type="FontAwesome" />
-      </Fab>
+      </Fab> */}
     </Container>
   );
 };
 
 const styles = StyleSheet.create({});
 
-export default NumbersListScreen;
+export default ListContact;

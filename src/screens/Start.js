@@ -6,7 +6,7 @@ import { Grid } from "react-native-easy-grid";
 //destructuring
 const { width, height } = Dimensions.get("window");
 //renderizar pantalla
-const Inicio = ({ route, navigation }) => {
+const Start = ({ route, navigation }) => {
   return (
     //backgroundcolor el color de fondo
     <Container>
@@ -24,9 +24,11 @@ const Inicio = ({ route, navigation }) => {
           <Text style={styles.buttonName}>Add numero </Text>
         </Button>
         <Button  
+          onPress={() => navigation.navigate("VerModificar")}
           style={styles.buttonCenter}
           block
           blue
+          
         >
           <Text style={styles.buttonName}>view contacts </Text>
         </Button>
@@ -67,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Inicio;
+export default Start;
