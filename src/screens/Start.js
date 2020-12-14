@@ -34,7 +34,6 @@ const Start = ({ route, navigation }) => {
           onPress={() => navigation.navigate("VerModificar")}
           style={styles.buttonCenter}
           block
-          blue
           
         >
           <Text style={styles.buttonName}>View contacts </Text>
@@ -65,15 +64,15 @@ const styles = StyleSheet.create({
       },
   buttonName: {
     fontSize: 25,
-    color: "black",
+    color: "#7ed321",
   },
   buttonCenter: {
     marginTop: "15%",
     marginRight: "10%",
     marginLeft: "10%",
-    backgroundColor: "#7ed321",
+    backgroundColor: "black",
     borderColor: "black",
-    borderWidth: 5,
+    borderWidth: 4,
     justifyContent: "center",
     alignItems: "center",
     height: "14%",

@@ -19,6 +19,7 @@ const { width, height } = Dimensions.get("window");
 
 // Importar el contexto de las notas
 import { NumbersContext } from "../context/NumbersContext";
+import { withSafeAreaInsets } from "react-native-safe-area-context";
 
 const AddContact = ({ navigation }) => {
   const [number, setNumber] = useState("");
@@ -79,12 +80,12 @@ const AddContact = ({ navigation }) => {
             style={styles.wallpaper}
           />
         </Grid>
-        <H1>Fill the information below</H1>
+        <H1 style={styles.h1}>Fill the information below</H1>
 
         <Textarea
           rowSpan={2}
           bordered
-          placeholder="Nombre"
+          placeholder="Names"
           value={nombre}
           onChangeText={setNombre}
           style={errorNumber ? styles.inputError : styles.number}
@@ -98,7 +99,7 @@ const AddContact = ({ navigation }) => {
         <Textarea
           rowSpan={2}
           bordered
-          placeholder="Apellido"
+          placeholder="Surnames"
           value={lastname}
           onChangeText={setLastname}
           style={errorNumber ? styles.inputError : styles.number}
@@ -111,7 +112,7 @@ const AddContact = ({ navigation }) => {
         <Textarea
           rowSpan={2}
           bordered
-          placeholder="Numero"
+          placeholder="Phone number"
           value={number}
           onChangeText={setNumber}
           style={errorNumber ? styles.inputError : styles.number}
@@ -124,7 +125,7 @@ const AddContact = ({ navigation }) => {
          <Textarea
           rowSpan={2}
           bordered
-          placeholder="Correo Electronico"
+          placeholder="Email"
           value={mail}
           onChangeText={setMail}
           style={styles.number}
@@ -134,10 +135,12 @@ const AddContact = ({ navigation }) => {
         <Button
           style={styles.button}
           onPress={handlerNewNumber}
-          style={styles.caja}
+          block
           // disabled={enableSave}
         >
-          <Text>Guardar</Text>
+          <Text
+          style={styles.si}
+          >Add</Text>
         </Button>
         </Form>
         
@@ -151,17 +154,34 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
+  si: {
+    color: "#7ed321",
+  },
   container: {
     //padding: 10,
   },
+  h1:{
+    marginLeft:30,
+    marginTop:30,
+    marginBottom: 30,
+  },
   button: {
-    fontFamily: "Roboto",
+    //fontFamily: "Roboto",
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    backgroundColor: "black",
+    borderColor: "black",
+    borderWidth: 5,
   },
   caja: {
     marginLeft: 10,
     marginRight: 10,
     marginTop: 10,
+    fontSize: 25,
+    height: 40,
     borderColor: "black",
+    backgroundColor: "white",
   },
   error: {
     fontSize: 12,
