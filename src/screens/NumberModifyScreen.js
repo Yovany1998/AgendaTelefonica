@@ -1,28 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import {
-  Button,
   Container,
   Content,
-  H1,
   Text,
   Textarea,
   Spinner,
-  View,
+  Button,
 } from "native-base";
 import * as Font from "expo-font";
 
 // Importar el contexto de las notas
 import { NumbersContext } from "../context/NumbersContext";
 
-const Telefono = ({ navigation }) => {
-  const [number, setNumber] = useState("");
-  const [nombre, setNombre] = useState("");
-  const [fontsLoaded, setFontsLoaded] = useState(false);
-  const [enableSave, setEnableSave] = useState(true);
+const NumberModifyScreen = ({ route, navigation }) => {
+  const { id } = route.params;
+  const [theNumber, setTheNumber] = useState(null);
+  const [theNombre, setTheNombre] = useState(false);
   const [errorNumber, setErrorNumber] = useState(false);
+  const [fontsLoaded, setFontsLoaded] = useState(false);
   const numbersContext = useContext(NumbersContext);
-  const { addNewNumber, refreshNumbers } = numbersContext;
+  const { number, getNumberById } = numbersContext;
+  const { nombrer, getNombreById } = numbersContext;
 
   // Cargar la fuente de manera asíncrona
   useEffect(() => {
@@ -37,13 +36,26 @@ const Telefono = ({ navigation }) => {
     loadFontsAsync();
   }, []);
 
-  // Ejecutar el efecto cuando el valor de la nota cambie
   useEffect(() => {
-    if (number) setEnableSave(false);
-    else setEnableSave(true);
-  }, [number]);
+    const getNumber = () => {
+      getNumberById(id);
+    };
 
-  const handlerNewNumber = async () => {
+    getNumber();
+
+    // Verificar si la nota tiene valor previo a extraer sus valores
+    if (number.length) {
+      setTheNumber(number[0].number);
+      setTheNombre(number[0].nombre);
+
+      console.log(theNumber);
+      console.log(theNombre);
+    }
+  }, [id, number]);
+
+
+
+  const handlerSaveNumber = async () => {
     // Validar que la nota tiene valor
     if (number) {
       await addNewNumber(nombre,number, refreshNumbers);
@@ -55,48 +67,45 @@ const Telefono = ({ navigation }) => {
     }
   };
 
-  if (!fontsLoaded)
+  if (!theNumber) {
     return (
       <Content contentContainerStyle={styles.content}>
         <Spinner color="blue" />
       </Content>
     );
-
+  }
+ 
   return (
     <Content>
       <Container style={styles.container}>
-        <H1>Ingresa numero</H1>
+        <Text>Modificar nota</Text>
 
         <Textarea
-          rowSpan={2}
+          value={theNombre}
+          style={styles.number}
           bordered
-          placeholder="Nombre"
-          value={nombre}
-          onChangeText={setNombre}
-          style={errorNumber ? styles.inputError : styles.number}
+          rowSpan={2}
+          onChange={setTheNumber}
         />
         {errorNumber ? (
-          <Text style={styles.error}>¡Debes ingresar un numero!</Text>
-        ) : null}
-
-        <Textarea
-          rowSpan={2}
-          bordered
-          placeholder="Numero"
-          value={number}
-          onChangeText={setNumber}
-          style={errorNumber ? styles.inputError : styles.number}
-        />
-        {errorNumber ? (
-          <Text style={styles.error}>¡Debes ingresar un numero!</Text>
+          <Text style={styles.error}>¡Debes ingresar una nota!</Text>
         ) : null}
 
         
-        <Button
-          style={styles.button}
-          onPress={handlerNewNumber}
-          // disabled={enableSave}
-        >
+
+        <Textarea
+          value={theNumber}
+          style={styles.number}
+          bordered
+          rowSpan={2}
+          onChange={setTheNumber}
+        />
+        {errorNumber ? (
+          <Text style={styles.error}>¡Debes ingresar una nota!</Text>
+        ) : null}
+
+        
+        <Button style={styles.button} onPress={handlerSaveNumber}>
           <Text>Guardar</Text>
         </Button>
       </Container>
@@ -112,8 +121,9 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
   },
-  button: {
-    fontFamily: "Roboto",
+  note: {
+    borderColor: "black",
+    marginBottom: 10,
   },
   error: {
     fontSize: 12,
@@ -123,10 +133,6 @@ const styles = StyleSheet.create({
   inputError: {
     borderColor: "red",
   },
-  number: {
-    borderColor: "black",
-    marginBottom: 10,
-  },
 });
 
-export default Telefono;
+export default NumberModifyScreen;
