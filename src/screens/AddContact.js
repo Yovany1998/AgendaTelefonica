@@ -59,12 +59,13 @@ const AddContact = ({ navigation }) => {
       // Regresar a la pantalla anterior
       navigation.goBack();
     } 
-    if (nombre) {
-      setErrorNumber(true);
-    }
     if (number) {
       setErrorNombre(true);
     }
+    else {
+      setErrorNumber(true);
+    }
+   
   };
 
   // Spinner cuando no ha cargado la pantalla
