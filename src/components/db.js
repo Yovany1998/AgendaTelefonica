@@ -1,13 +1,12 @@
 import React from "react";
 import * as SQLite from "expo-sqlite";
 
-// https://docs.expo.io/versions/latest/sdk/sqlite/
 // Crea y abre la base de datos
 const db = SQLite.openDatabase("fastcontactos.db");
 
 // Funcionalidades de la base de datos
 
-// Obtener las notas del usuario
+// Obtener la lista de contactos
 const getNumbers = (setNumbersFunc) => {
   db.transaction((tx) => {
     tx.executeSql(
@@ -27,7 +26,7 @@ const getNumbers = (setNumbersFunc) => {
   });
 };
 
-// Obtener la nota por el id
+// Obtener el contacto por el id
 const getNumberById = (id, setNumberFunc) => {
   db.transaction((tx) => {
     tx.executeSql(
@@ -47,7 +46,7 @@ const getNumberById = (id, setNumberFunc) => {
   });
 };
 
-// Insertar notas
+// Insertar contacto
 const insertNumbers = async (nombre,
   lastname,number,mail, successFunc) => {
   db.transaction(
@@ -60,7 +59,34 @@ const insertNumbers = async (nombre,
       ]);
     },
     (_t, error) => {
-      console.log("Error al insertar la nota");
+      console.log("Error al insertar el contacto");
+      console.log(error);
+    },
+    (_t, _success) => {
+      successFunc;
+    }
+  );
+};
+
+// Actualizar contacto
+const updateNumbers = async (nombre,
+  lastname,number,mail,id, successFunc) => {
+    console.log("Este es el id");
+    console.log(id);
+    console.log("Este es el numero");
+    console.log(number);
+  db.transaction(
+    (tx) => {
+      tx.executeSql("update numbers set nombre = ?, lastname = ?, number = ?, mail = ? where id = ?", [
+        nombre,
+        lastname,
+        number,
+        mail,
+        id,
+      ]);
+    },
+    (_t, error) => {
+      console.log("Error al actualizar el contacto");
       console.log(error);
     },
     (_t, _success) => {
@@ -87,7 +113,7 @@ const dropDatabaseTableAsync = async () => {
   });
 };
 
-// Creación de la tabla de notas
+// Creación de la tabla de contactos
 const setupDatabaseTableAsync = async () => {
   return new Promise((resolve, reject) => {
     db.transaction(
@@ -109,7 +135,7 @@ const setupDatabaseTableAsync = async () => {
   });
 };
 
-// Agrega una nota por defecto
+// Agrega un contacto por defecto
 const setupNumbersAsync = async () => {
   return new Promise((resolve, reject) => {
     db.transaction(
@@ -133,6 +159,7 @@ const setupNumbersAsync = async () => {
   });
 };
 
+// Exportar las variables
 export const database = {
   getNumbers,
   insertNumbers,
@@ -140,4 +167,5 @@ export const database = {
   setupDatabaseTableAsync,
   setupNumbersAsync,
   getNumberById,
+  updateNumbers,
 };

@@ -10,8 +10,7 @@ import ListContact from "./src/screens/ListContact";
 import AddContact from "./src/screens/AddContact";
 import ModifyContact from "./src/screens/ ModifyContact";
 
-
-
+// Funcion Stack para el navigate
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -32,8 +31,8 @@ export default function App() {
            options={{
             headerShown: false,
           }}
+          // Componente para start
            component={Start} />
-         
             <Stack.Screen name="Contacts" 
             options={{
               headerTintColor: '#7ed321',
@@ -41,6 +40,7 @@ export default function App() {
                 backgroundColor: 'black',
               },
             }}
+            // Componente para ListContact
             component={ListContact} />
             <Stack.Screen name="Add contact" 
             options={{
@@ -49,6 +49,7 @@ export default function App() {
                 backgroundColor: 'black',
               },
             }}
+            // Componente para AddContact
             component={AddContact} />
             <Stack.Screen name="Update" 
             options={{
@@ -57,6 +58,7 @@ export default function App() {
                 backgroundColor: 'black',
               },
             }}
+            // Componente para Modify Contact
             component={ModifyContact} />
           </Stack.Navigator>
         </NavigationContainer>

@@ -1,7 +1,7 @@
 import React, { useEffect, createContext, useState } from "react";
 import { database } from "../components/db";
 
-// Crear el contexto de las notas
+// Crear el contexto de los contactos
 export const NumbersContext = createContext({});
 
 export const NumbersContextProvider = (props) => {
@@ -12,46 +12,42 @@ export const NumbersContextProvider = (props) => {
   // Almacenar los valores en el estado
   const [numbers, setNumbers] = useState(initialNumbers);
   const [number, setNumber] = useState("");
-  const [nombre, setNombre] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [mail, setMail] = useState("");
-  // Cargar u obtener las notas
+
+  // Cargar u obtener los contactos
   useEffect(() => {
     refreshNumbers();
   }, []);
 
+  // Funcion de refrescar la lista de contactos
   const refreshNumbers = () => {
     return database.getNumbers(setNumbers);
   };
 
+  // Funcion de agregar contactos
   const addNewNumber = async (nombre,lastname,number,mail) => {
     await database.insertNumbers(nombre,lastname,number,mail, refreshNumbers);
     return refreshNumbers();
   };
 
+  // Funcion para obtener contactos
   const getNumberById = (id) => {
-    return database.getNumberById(id, setNumber,setNombre,setLastname,setMail);
-
-    console.log(response);
-
-    // Obtener el valor de la primera posición del arreglo
-    // const value = note[0];
-    // setNote(value);
-
-    // console.log(value);
-    // console.log(note);
+    return database.getNumberById(id, setNumber);
   };
   
+  // Funcion para actualizar 
+  const updateNumber = async(nombre,lastname,number,mail,id) => {
+    await database.updateNumbers(nombre,lastname,number,mail,id, refreshNumbers);
+    console.log(mail);
+    return refreshNumbers();
+  }
 
   // Crear el objeto de contexto
   const numbersContext = {
     numbers,
     number,
-    nombre,
-    lastname,
-    mail,
     addNewNumber,
     getNumberById,
+    updateNumber,
   };
 
   // Pasar los valores al proveedor y retornarlo

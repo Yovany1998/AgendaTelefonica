@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet} from "react-native";
 import {
   Container,
   Content,
-  Fab,
   Icon,
   List,
   ListItem,
@@ -12,17 +11,18 @@ import {
   Right,
   Form,
 } from "native-base";
-import { Grid } from "react-native-easy-grid";
 
-// Utilizar el contexto de notas
+// Utilizar el contexto de los contactos
 import { NumbersContext } from "../context/NumbersContext";
 
+// Creacion de pantalla de ListContact
 const ListContact = ({ navigation }) => {
-  const { numbers } = useContext(NumbersContext);
+const { numbers } = useContext(NumbersContext);
 
   return ( 
     <Container>
       <Content style={styles.content}>
+        {/* Lista de contactos */}
         <Form>
         <List style={styles.list}>
           {numbers
@@ -33,6 +33,7 @@ const ListContact = ({ navigation }) => {
                     navigation.navigate("Update", { id: number.id });
                   }}
                 >
+                  {/* Datos del contacto */}
                   <Body>
                     <Text numberOfLines={2} style={styles.name}>Names: {number.nombre}</Text>
                     <Text numberOfLines={2} style={styles.name}>Surnames: {number.lastname}</Text>
@@ -48,21 +49,11 @@ const ListContact = ({ navigation }) => {
         </List>
         </Form>
       </Content>
-      {/* <Fab
-        active={true}
-        position="bottomRight"
-        style={{ backgroundColor: "#ff0023" }}
-        direction="up"
-        onPress={() => {
-          navigation.navigate("numberCreate");
-        }}
-      >
-        <Icon name="plus" type="FontAwesome" />
-      </Fab> */}
     </Container>
   );
 };
 
+// Estilos para pagina de ListContact
 const styles = StyleSheet.create({
   list:{
     backgroundColor: "gray",

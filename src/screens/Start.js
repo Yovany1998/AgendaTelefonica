@@ -1,28 +1,30 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
-import { Input, Container, Form, Item, H1, Button, Content } from "native-base";
+import { StyleSheet, Text, Image, Dimensions } from "react-native";
+import { Container, Form, Button,} from "native-base";
 import { Grid } from "react-native-easy-grid";
 
 //destructuring
 const { width, height } = Dimensions.get("window");
+
 //renderizar pantalla
-const Start = ({ route, navigation }) => {
+const Start = ({ navigation }) => {
   return (
     //backgroundcolor el color de fondo
     <Container> 
       <Form>
       <Grid>
+        {/* Imagen de fondo */}
           <Image
             source={require("../../assets/siu.jpg")}
             style={styles.wallpaper}
           />
         </Grid>
+        {/* Imagen de encabezado */}
       <Image
         source={require("../../assets/simio.png")}
         style={styles.photoImage}
       />
-      
-       
+        {/* Boton para pagina de agregar contactos */}
         <Button
           onPress={() => navigation.navigate("Add contact")}
           style={styles.buttonCenter}
@@ -30,6 +32,7 @@ const Start = ({ route, navigation }) => {
         >
           <Text style={styles.buttonName}>Add contacts </Text>
         </Button>
+        {/* Boton para pagina de ver contactos */}
         <Button  
           onPress={() => navigation.navigate("Contacts")}
           style={styles.buttonCenter}
@@ -46,22 +49,18 @@ const Start = ({ route, navigation }) => {
   );
 };
 
-//estilos de la pantalla
+// Estilos de la pantalla 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      },
-      input: {
-        margin: 15,
-      },
-      photoImage: {
-        width: width,
-        height: "25%",
-        resizeMode: "contain",
-        //marginTop: 20,
-      },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  photoImage: {
+    width: width,
+    height: "25%",
+    resizeMode: "contain",
+  },
   buttonName: {
     fontSize: 25,
     color: "#7ed321",
@@ -76,7 +75,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: "14%",
-    //flex: 6,
   },
   wallpaper: {
     flex: 1,

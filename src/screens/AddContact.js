@@ -8,19 +8,18 @@ import {
   Text,
   Textarea,
   Spinner,
-  View,
   Form,
 } from "native-base";
 import * as Font from "expo-font";
 import { Grid } from "react-native-easy-grid";
 
 //destructuring
-const { width, height } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 
-// Importar el contexto de las notas
+// Importar contexto de los contactos
 import { NumbersContext } from "../context/NumbersContext";
-import { withSafeAreaInsets } from "react-native-safe-area-context";
 
+// Pantalla de agregar contacto
 const AddContact = ({ navigation }) => {
   const [number, setNumber] = useState("");
   const [nombre, setNombre] = useState("");
@@ -29,6 +28,7 @@ const AddContact = ({ navigation }) => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [enableSave, setEnableSave] = useState(true);
   const [errorNumber, setErrorNumber] = useState(false);
+  const [errorNombre, setErrorNombre] = useState(false);
   const numbersContext = useContext(NumbersContext);
   const { addNewNumber, refreshNumbers } = numbersContext;
 
@@ -45,24 +45,29 @@ const AddContact = ({ navigation }) => {
     loadFontsAsync();
   }, []);
 
-  // Ejecutar el efecto cuando el valor de la nota cambie
+  // Ejecutar el efecto cuando el valor del contacto cambie
   useEffect(() => {
     if (number) setEnableSave(false);
     else setEnableSave(true);
   }, [number]);
 
   const handlerNewNumber = async () => {
-    // Validar que la nota tiene valor
-    if (number) {
+    // Validar que el contacto tiene valor
+    if (number && nombre) {
       await addNewNumber(nombre,lastname,number,mail, refreshNumbers);
 
       // Regresar a la pantalla anterior
       navigation.goBack();
-    } else {
+    } 
+    if (nombre) {
       setErrorNumber(true);
+    }
+    if (number) {
+      setErrorNombre(true);
     }
   };
 
+  // Spinner cuando no ha cargado la pantalla
   if (!fontsLoaded)
     return (
       <Content contentContainerStyle={styles.content}>
@@ -75,6 +80,7 @@ const AddContact = ({ navigation }) => {
       <Container style={styles.container}>
         <Form>
         <Grid>
+          {/* Imagen del encabezado */}
           <Image
             source={require("../../assets/siu.jpg")}
             style={styles.wallpaper}
@@ -82,33 +88,31 @@ const AddContact = ({ navigation }) => {
         </Grid>
         <H1 style={styles.h1}>Fill the information below</H1>
 
+        {/* Casilla de nombre */}
         <Textarea
           rowSpan={2}
           bordered
           placeholder="Names"
           value={nombre}
           onChangeText={setNombre}
-          style={errorNumber ? styles.inputError : styles.number}
+          style={errorNombre ? styles.inputError : styles.number}
           style={styles.caja}
         />
-        {errorNumber ? (
+        {errorNombre ? (
           <Text style={styles.error}>You need to add the names!</Text>
         ) : null}
 
-
+        {/* Casilla de apellido */}
         <Textarea
           rowSpan={2}
           bordered
           placeholder="Surnames"
           value={lastname}
           onChangeText={setLastname}
-          style={errorNumber ? styles.inputError : styles.number}
           style={styles.caja}
         />
-        {errorNumber ? (
-          <Text style={styles.error}>You need to add the surnames!</Text>
-        ) : null}
 
+        {/* Casilla de numero */}
         <Textarea
           rowSpan={2}
           bordered
@@ -122,6 +126,7 @@ const AddContact = ({ navigation }) => {
           <Text style={styles.error}>You need to add the phone number!</Text>
         ) : null}
 
+          {/* Casilla de correro */}
          <Textarea
           rowSpan={2}
           bordered
@@ -132,15 +137,14 @@ const AddContact = ({ navigation }) => {
           style={styles.caja}
         />
 
+        {/* Boton para agregar contactos */}
         <Button
           style={styles.button}
           onPress={handlerNewNumber}
           block
-          // disabled={enableSave}
         >
-          <Text
-          style={styles.si}
-          >Add</Text>
+          <Text style={styles.si}>Add</Text>
+          
         </Button>
         </Form>
         
@@ -149,6 +153,7 @@ const AddContact = ({ navigation }) => {
   );
 };
 
+// Estilos para la pantalla AddContact
 const styles = StyleSheet.create({
   content: {
     flex: 1,
@@ -157,16 +162,12 @@ const styles = StyleSheet.create({
   si: {
     color: "#7ed321",
   },
-  container: {
-    //padding: 10,
-  },
   h1:{
     marginLeft:30,
     marginTop:30,
     marginBottom: 30,
   },
   button: {
-    //fontFamily: "Roboto",
     marginLeft: 10,
     marginRight: 10,
     marginTop: 10,
